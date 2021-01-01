@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+  app:
+    container_name: accounting-php
+    build:
+      args:
+        user: renit
+        uid: 1000
+      dockerfile: Dockerfile
+      context: ./docker/php
+    volumes:
+      - .:/var/www/html
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    networks:
+      - accounting
+
+  mysql:
+    container_name: accounting-mysql
+    image: mysql:5.7.28
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    ports:
+      - 3336:3306
+    restart: unless-stopped
+    networks:
+      - accounting
+
+  nginx:
+    container_name: accounting-nginx
+    image: nginx:1.19-alpine
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx:/etc/nginx/conf.d
+    restart: unless-stopped
+    networks:
+      - accounting
+    depends_on:
+      - app
+
+networks:
+  accounting:
+     driver: bridge
