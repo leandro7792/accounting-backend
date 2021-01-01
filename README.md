@@ -6,9 +6,9 @@ Set values in DB_(...) variables from .env
 
 
 
-docker-compose exec accounting-php composer install
+docker exec accounting-php composer install
 
-docker-compose exec accounting-php php artisan key:generate
+docker exec accounting-php php artisan key:generate
 
 
 
