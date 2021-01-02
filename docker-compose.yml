@@ -45,6 +45,7 @@ services:
     volumes:
       - .:/var/www/html
       - ./docker/nginx:/etc/nginx/conf.d
+      - ./docker/logs:/var/log/nginx/
     restart: unless-stopped
     networks:
       - accounting

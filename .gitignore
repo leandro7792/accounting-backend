@@ -2,6 +2,8 @@ docker/mysql/*
 !docker/mysql/.gitkeep
 docker/nginx/*
 !docker/nginx/app.conf
+docker/logs/*
+!docker/logs/.gitkeep
 docker/php/*
 !docker/php/Dockerfile
 node_modules
