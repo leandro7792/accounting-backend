@@ -28,7 +28,7 @@ docker exec accounting-php php artisan route:cache
 docker exec accounting-php php artisan view:cache
 ```
 
-### For both
+### After any of the above
 
 ```
 docker exec accounting-php php artisan migrate
