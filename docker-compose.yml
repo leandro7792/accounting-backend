@@ -5,7 +5,7 @@ services:
     image: leandro7792/accounting-backend
     build:
       args:
-        user: renit
+        user: accounting
         uid: 1000
       dockerfile: Dockerfile
       context: ./docker/php
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./docker/mysql:/var/lib/mysql
     ports:
-      - 3336:3306
+      - ${MYSQL_PORT}:3306
     restart: unless-stopped
     networks:
       - accounting
