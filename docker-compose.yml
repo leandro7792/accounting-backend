@@ -41,7 +41,7 @@ services:
     container_name: accounting-nginx
     image: nginx:1.19-alpine
     ports:
-      - 8000:80
+      - ${NGINX_PORT}:80
     volumes:
       - .:/var/www/html
       - ./docker/nginx:/etc/nginx/conf.d
